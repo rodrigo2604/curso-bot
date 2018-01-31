@@ -1,2 +1,2 @@
 # curso-bot
-Applicacion chatbot simple que atiende incidencias de una empresa determinada
+Aplicación chatbot simple que atiende incidencias de los usuarios de una empresa determinada
