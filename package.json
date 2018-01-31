@@ -1,0 +1,25 @@
+{
+  "name": "curso-bot",
+  "version": "1.0.0",
+  "description": "Aplicacinn simple de chatbot que atiene incidencias de usuarios de una mepresa determinada",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigo2604/curso-bot.git"
+  },
+  "keywords": [
+    "Node",
+    "Microsoft",
+    "Azure",
+    "Bot Framework"
+  ],
+  "author": "rodrigo2604",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigo2604/curso-bot/issues"
+  },
+  "homepage": "https://github.com/rodrigo2604/curso-bot#readme"
+}
