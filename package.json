@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/rodrigo2604/curso-bot#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "botbuilder": "^3.14.0",
     "restify": "^6.3.4"
   }

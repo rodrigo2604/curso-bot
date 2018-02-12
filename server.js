@@ -1,5 +1,6 @@
 const builder = require('botbuilder');
 const restify = require('restify');
+const dialogs = require('./dialogs');
 
 const server = restify.createServer();
 
@@ -16,11 +17,4 @@ server.post('/api/messages', connector.listen());
 
 const bot = new builder.UniversalBot(connector);
 
-bot.dialog('/', [
-  function (session) {
-    builder.Prompts.text(session, 'Hola soy Larry, ¿cómo te llamas?');
-  },
-  function (session, results) {
-    session.send(`¡Hola ${results.response}!`);
-  }
-]);
+dialogs.startConversation(bot);
