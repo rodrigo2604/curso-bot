@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "botbuilder": "^3.14.0",
+    "moment": "^2.20.1",
     "restify": "^6.3.4"
   }
 }
