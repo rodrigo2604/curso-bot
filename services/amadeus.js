@@ -9,7 +9,11 @@ const Amadeus = {
 
     let response = await axios
       .get(`${amadeus_url}/inspiration-search?apikey=${process.env.AMADEUS_CONSUMER_KEY}&origin=${origin}&destination=${destination}&departure_date=${departure_date}&one-way=${oneWay}&direct=${direct}`);
-    return response.data;
+
+    return {
+      price: response.data.results[0].price,
+      currency: response.data.currency,
+    } // TODO: Se debe retornar también la aerolínea
   }
 };
 

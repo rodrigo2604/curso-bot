@@ -62,12 +62,14 @@ function askForDirectFlight(session, results, next) {
 
 }
 
+// TODO: Enviar mensaje de confirmación con todo el resumen
+
 function doBilling(session, results, next) {
   session.dialogData.direct = results.response.index === 0;
 
   amadeus.searchFlights(session.dialogData)
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+    .then(result => session.send(`Tu viaje te sale ${result.price}${result.currency}`).endDialog())
+    .catch(err => session.send('Lo sentimos, ha ocurrido un error en el sistema :( ').endDialog());
 }
 
 module.exports = setFlightBillingDialog;
