@@ -1,2 +1,2 @@
 # curso-bot
-Aplicación chatbot simple que atiende incidencias de los usuarios de una empresa determinada
+Aplicación chatbot simple que proporciona información de tarificación de vuelos con amadeus y condiciones climáticas.
