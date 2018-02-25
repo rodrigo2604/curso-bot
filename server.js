@@ -97,7 +97,7 @@ bot.dialog('pedirDatos', [
   confirmarNombre,
 ])
   .beginDialogAction('mostrarNumeroDatos', 'mostrarDatos', {
-    matches: /^datos necesarios$/i
+    matches: /^es necesario mi nombre$/i
   });
 
 bot.dialog('mostrarDatos', (session) => session.endDialog('Te pido tu nombre para dirigirme hacia a tí'));
