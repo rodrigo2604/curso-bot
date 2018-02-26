@@ -75,7 +75,7 @@ function handleTime(session, results, next) {
 }
 
 function confirmOrder(session, results, next) {
-  const msg = setOrderState(session.conversationData);
+  const msg = getOrderState(session.conversationData);
   builder.Prompts.confirm(session, msg);
 }
 

@@ -30,7 +30,7 @@ function startIngredientes(session, results, next) {
 }
 
 function handleIngredient(session, results, next) {
-  let chosenIngredients = session.dialogData.ingredients;
+  let chosenIngredients = session.conversationData.ingredients;
 
   if (results.response && results.response.index !== 0) {
     const ingredient = results.response.entity;
@@ -45,7 +45,7 @@ function handleIngredient(session, results, next) {
 
 function confirmIngredients(session, results, next) {
   if (results.response) {
-    session.endDialogWithResult({ chosenIngredients: session.dialogData.ingredients });
+    session.endDialogWithResult({ chosenIngredients: session.conversationData.ingredients });
   } else {
     session.replaceDialog('ingredientes');
   }
