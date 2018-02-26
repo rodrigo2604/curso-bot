@@ -10,6 +10,7 @@ const pizzaSizes = {
 };
 
 const ingredients = [
+  'no deseo más ingredientes',
   'peperoni',
   'jamon',
   'bacon',

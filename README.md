@@ -15,5 +15,6 @@ En esta rama se da una solución parcial al ejercicio propuesto en clase. En dic
     - Mostrar un resumen, precio y hora a la cual la pizza esté lista
 - Durante el diálogo de pedido a *recoger* el usuario podrá solicitar el estado del pedido
 - Durante el diálogo de pedido a *recoger* empezar de nuevo su pedido
+- Durante el diálogo de petición de ingredientes el usuario puede solocitar los ingredientes pedidos o empezar de nuevo
 - Durante cualquier punto de la conversación el usuario podrá cancelar el pedido
 - Durante cualquier punto de la conversación el usuario podrá solicitar información de precios y promociones

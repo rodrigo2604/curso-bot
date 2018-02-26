@@ -18,6 +18,7 @@ class AppConversation {
 
   initDialogs(bot) {
     require('./recoger')(bot);
+    require('./ingredientes')(bot);
   }
 }
 

@@ -24,6 +24,7 @@
   "homepage": "https://github.com/rodrigo2604/curso-bot#readme",
   "dependencies": {
     "botbuilder": "^3.14.0",
+    "moment": "^2.20.1",
     "restify": "^6.3.4"
   }
 }
