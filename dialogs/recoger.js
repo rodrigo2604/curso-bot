@@ -13,6 +13,20 @@ const setRecoger = (bot) => {
     handleTime,
     confirmOrder,
     endRecoger,
+  ])
+    .reloadAction('empezarDeNuevo', 'De acuerdo, empecemos de nuevo.', {
+      matches: /^empezar de nuevo$/i,
+    })
+    .cancelAction('cancelAction', 'Está bien, cancelamos el pedido', {
+      matches: /^cancelar$|^ya no quiero$/i,
+      confirmPrompt: '¿Está seguro de que desea cancelar el pedido?'
+    })
+    .beginDialogAction('mostrarEstado', 'mostrarEstado', {
+      matches: /^mostrar pedido$/i,
+    });
+
+  bot.dialog('mostrarEstado', [
+    session => session.endDialog(getOrderState(session.conversationData)),
   ]);
 }
 
@@ -28,7 +42,7 @@ function startRecoger(session, results, next) {
 function handleSize(session, results, next) {
   if (results.response) {
     const size = pizzaSizes[results.response.entity];
-    session.dialogData.size = size;
+    session.conversationData.size = size;
     session.send(`De acuerdo, será una pizza ${size.description}`);
     session.beginDialog('ingredientes');
   }
@@ -36,11 +50,10 @@ function handleSize(session, results, next) {
 
 function handleIngredients(session, results, next) {
   if (results.chosenIngredients) {
-    session.dialogData.ingredients = results.chosenIngredients;
-    session.dialogData.price = '7,95€';
+    session.conversationData.ingredients = results.chosenIngredients;
+    session.conversationData.price = '7,95€';
   } else {
-    session.dialogData.ingredients = 'Sin ingredientes';
-    session.dialogData.price = '4,95€';
+    session.conversationData.price = '4,95€';
   }
 
   next();
@@ -53,32 +66,36 @@ function askForTime(session, results, next) {
 function handleTime(session, results, next) {
   if (results.response) {
     const timeResponse = builder.EntityRecognizer.resolveTime([results.response]);
-    session.dialogData.time = moment(timeResponse).format('LT');
+    session.conversationData.time = moment(timeResponse).format('LT');
   } else {
-    session.dialogData.time = 'en media hora';
+    session.conversationData.time = 'en media hora';
   }
 
   next();
 }
 
 function confirmOrder(session, results, next) {
-  const msg = `
-    Este es el resumen de tu pedido:
-      - Pizza ${session.dialogData.size.description}
-      - Ingredientes: ${session.dialogData.ingredients.join()}
-      - Hora de entrega: ${ session.dialogData.time}
-      - Precio: ${session.dialogData.price}
-    ¿Es correcto?
-    `;
-
+  const msg = setOrderState(session.conversationData);
   builder.Prompts.confirm(session, msg);
 }
 
 function endRecoger(session, results, next) {
   if (results.response) {
-    session.endDialog(`¡Gracias!, puede venir a recoger su pedido: ${session.dialogData.time}`);
+    session.endDialog(`¡Gracias!, puede venir a recoger su pedido: ${session.conversationData.time}`);
   } else {
     session.send('De acuerdo, en ese caso comnecemos de nuevo');
     session.replaceDialog('recoger');
   }
+}
+
+// =====================================Aux functions==============================================
+
+function getOrderState({ size, ingredients, time, price }) {
+  return `
+  Este es el resumen de tu pedido:
+    - Pizza ${size ? size.description : 'N/D'}
+    - Ingredientes: ${ingredients ? ingredients.join() : 'N/D'}
+    - Hora de entrega: ${time || ''}
+    - Precio: ${price || 'N/D'}
+  `;
 }

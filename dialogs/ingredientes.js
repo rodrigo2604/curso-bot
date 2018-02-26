@@ -6,6 +6,17 @@ const setIngredientes = (bot) => {
     startIngredientes,
     handleIngredient,
     confirmIngredients,
+  ])
+    .beginDialogAction('mostrarIngredientes', 'mostrarIngredientes', {
+      matches: /^mostrar ingredientes$/i,
+    });
+
+  bot.dialog('mostrarIngredientes', [
+    session => {
+      if (session.conversationData.ingredientes) {
+        session.endDialog(`Ha pedido: ${session.conversationData.ingredientes.join()}`);
+      }
+    }
   ]);
 }
 
@@ -14,13 +25,13 @@ module.exports = setIngredientes;
 // =====================================Waterfall functions==============================================
 
 function startIngredientes(session, results, next) {
-  session.dialogData.ingredients = results && results.chosenIngredients ? results.chosenIngredients : [];
+  session.conversationData.ingredients = results && results.chosenIngredients ? results.chosenIngredients : [];
   builder.Prompts.choice(session, `Dime qué ingredientes deseas:`, ingredients);
 }
 
 function handleIngredient(session, results, next) {
   let chosenIngredients = session.dialogData.ingredients;
-  
+
   if (results.response && results.response.index !== 0) {
     const ingredient = results.response.entity;
 
